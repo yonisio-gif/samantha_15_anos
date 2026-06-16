@@ -1,0 +1,10 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Estas reglas permiten acceso a tu base de datos hasta el 15 de julio de 2026
+    match /{document=**} {
+      allow read, write: if request.time < timestamp.date(2026, 7, 15);
+    }
+  }
+}
